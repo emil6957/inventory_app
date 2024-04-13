@@ -26,23 +26,24 @@ async function main() {
     console.log("Debug: About to connect");
     await mongoose.connect(mongoDB);
     console.log("Debug: Should be connected?");
-    await createCars();
     await createManufacturers();
     await createBodyTypes();
+    await createCars();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
 }
 
-async function carCreate(index, name, productionYearStart, productionYearEnd, bodyType, manufacturer, price, amntInStock) {
+async function carCreate(index, name, productionStartYear, productionEndYear, bodyType, manufacturer, price, amntInStock) {
     const carDetail = {
         name: name,
-        productionYearStart: productionYearStart,
-        productionYearEnd: productionYearEnd,
+        productionStartYear: productionStartYear,
+        productionEndYear: productionEndYear,
         price: price,
-        amntInStock, amntInStock,
+        amntInStock: amntInStock,
     }
     if (bodyType != false) carDetail.bodyType = bodyType;
     if (manufacturer != false) carDetail.manufacturer = manufacturer;
+
     const car = new Car(carDetail);
     await car.save();
     cars[index] = car;
@@ -67,8 +68,40 @@ async function bodyTypeCreate(index, type) {
     console.log(`Added body-type: ${type}`);
 }
 
+async function createBodyTypes() {
+    console.log("Adding bodyTypes");
+    await Promise.all([
+        bodyTypeCreate(0, "Coupe"),
+        bodyTypeCreate(1, "Sedan"),
+        bodyTypeCreate(2, "SUV"),
+        bodyTypeCreate(3, "Estate"),
+        bodyTypeCreate(4, "Hatchback"),
+        bodyTypeCreate(5, "4x4"),
+        bodyTypeCreate(6, "Roadster"),
+        bodyTypeCreate(7, "Van"),
+        bodyTypeCreate(8, "Jeep"),
+        bodyTypeCreate(9, "Wagon"),
+        bodyTypeCreate(10, "Saloon"),
+        bodyTypeCreate(11, "Sports-car")
+    ]);
+}
+
+async function createManufacturers() {
+    console.log("Adding manufacturers");
+    await Promise.all([
+        manufacturerCreate(0, "Ford", 1903),
+        manufacturerCreate(1, "Volkswagen", 1937),
+        manufacturerCreate(2, "Mercedes-Benz", 1926),
+        manufacturerCreate(3, "BMW", 1916),
+        manufacturerCreate(4, "Kia", 1944),
+        manufacturerCreate(5, "Audi", 1909),
+        manufacturerCreate(6, "Nissan", 1933),
+        manufacturerCreate(7, "Mazda", 1920),
+    ]);
+}
+
 async function createCars() {
-    console.log("Adding genres");
+    console.log("Adding cars");
     await Promise.all([
         carCreate(0, "Focus", 1998, 2018, bodyTypes[4], manufacturers[0], 1599, 4),
         carCreate(1, "Focus", 1998, 2018, bodyTypes[1], manufacturers[0], 1999, 2),
@@ -101,44 +134,5 @@ async function createCars() {
         carCreate(28, "MX-5", 1989, 2015, bodyTypes[6], manufacturers[7], 1999, 1),
         carCreate(29, "Colt", 1962, 2023, bodyTypes[4], manufacturers[7], 1699, 2),
         carCreate(30, "ASX", 2010, 2022, bodyTypes[2], manufacturers[7], 1799, 4),
-    ]);
-}
-
-async function createManufacturers() {
-    console.log("Adding authors");
-    await Promise.all([
-        manufacturerCreate(0, "Ford"),
-        manufacturerCreate(1, "Volkswagen"),
-        manufacturerCreate(2, "Mercedes-Benz"),
-        manufacturerCreate(3, "BMW"),
-        manufacturerCreate(4, "Kia"),
-        manufacturerCreate(5, "Audi"),
-        manufacturerCreate(6, "Nissan"),
-        manufacturerCreate(7, "Mazda"),
-        manufacturerCreate(8, "Mitsubishi"),
-        manufacturerCreate(9, "Tesla"),
-        manufacturerCreate(10, "Fiat"),
-        manufacturerCreate(11, "Honda"),
-        manufacturerCreate(12, "Ferrari"),
-        manufacturerCreate(13, "Porsche"),
-        manufacturerCreate(14, "Toyota"),
-    ]);
-}
-
-async function createBodyTypes() {
-    console.log("Adding Books");
-    await Promise.all([
-        bodyTypeCreate(0, "Coupe"),
-        bodyTypeCreate(1, "Sedan"),
-        bodyTypeCreate(2, "SUV"),
-        bodyTypeCreate(3, "Estate"),
-        bodyTypeCreate(4, "Hatchback"),
-        bodyTypeCreate(5, "4x4"),
-        bodyTypeCreate(6, "Roadster"),
-        bodyTypeCreate(7, "Van"),
-        bodyTypeCreate(8, "Jeep"),
-        bodyTypeCreate(9, "Wagon"),
-        bodyTypeCreate(10, "Saloon"),
-        bodyTypeCreate(11, "Sports-car")
     ]);
 }
