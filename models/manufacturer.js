@@ -11,4 +11,4 @@ ManufacturerSchema.virtual("url").get(function() {
     return `/manufacturer/${this._id}`;
 });
 
-module.exports = mongoose.model(ManufacturerSchema);
+module.exports = mongoose.model("Manufacturer", ManufacturerSchema);
