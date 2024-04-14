@@ -3,6 +3,7 @@ const router = express.Router();
 
 const car_controller = require("../controllers/carController.js");
 const manufacturer_controller = require("../controllers/manufacturerController.js");
+const bodyType_controller = require("../controllers/bodyTypeController.js");
 
 router.get("/", car_controller.index);
 
@@ -31,5 +32,19 @@ router.post("/manufacturer/:id/update", manufacturer_controller.manufacturer_upd
 
 router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
 router.get("/manufacturers", manufacturer_controller.manufacturer_list);
+
+router.get("/", bodyType_controller.index);
+
+router.get("/bodyType/create", bodyType_controller.bodyType_create_get);
+router.post("/bodyType/create", bodyType_controller.bodyType_create_post);
+
+router.get("/bodyType/:id/delete", bodyType_controller.bodyType_delete_get);
+router.post("/bodyType/:id/delete", bodyType_controller.bodyType_delete_post);
+
+router.get("/bodyType/:id/update", bodyType_controller.bodyType_update_get);
+router.post("/bodyType/:id/update", bodyType_controller.bodyType_update_post);
+
+router.get("/bodyType/:id", bodyType_controller.bodyType_detail);
+router.get("/bodyTypes", bodyType_controller.bodyType_list);
 
 module.exports = router;
