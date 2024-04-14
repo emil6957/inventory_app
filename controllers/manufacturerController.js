@@ -1,6 +1,10 @@
 const manufacturer = require("../models/manufacturer.js");
 const asyncHandler = require("express-async-handler");
 
+exports.index = asyncHandler(async (req, res, next) => {
+    res.send("TODO manufacturer HOMEPAGE");
+});
+
 exports.manufacturer_list = asyncHandler(async (req, res, next) => {
     res.send("TODO manufacturer_list");
 });

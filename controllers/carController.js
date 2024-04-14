@@ -1,5 +1,9 @@
-const car = require("../models/car.js");
+const Car = require("../models/car.js");
 const asyncHandler = require("express-async-handler");
+
+exports.index = asyncHandler(async (req, res, next) => {
+    res.send("TODO HOME PAGE");
+})
 
 exports.car_list = asyncHandler(async (req, res, next) => {
     res.send("TODO car list");

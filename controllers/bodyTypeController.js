@@ -1,6 +1,10 @@
 const bodyType = require("../models/bodyType.js");
 const asyncHandler = require("express-async-handler");
 
+exports.index = asyncHandler(async (req, res, next) => {
+    res.send("TODO bodyType HOMEPAGE");
+});
+
 exports.bodyType_list = asyncHandler(async (req, res, next) => {
     res.send("TODO bodType list");
 });
