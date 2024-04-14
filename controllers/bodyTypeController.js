@@ -1,4 +1,4 @@
-const bodyType = require("../models/bodyType.js");
+const BodyType = require("../models/bodyType.js");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {

@@ -1,4 +1,4 @@
-const manufacturer = require("../models/manufacturer.js");
+const Manufacturer = require("../models/manufacturer.js");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
