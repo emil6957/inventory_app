@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 #{title} 
+    
+    ul
+        each car in car_list
+            li
+                a(href=car.name) #{car.name}
+                if car.amntInStock == 0
+                    p(style="color: red;") #[strong OUT OF STOCK]
+                else
+                    p #[strong #{car.amntInStock} left in stock]
