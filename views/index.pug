@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  h1 Dynamic content
+
+  p The collection has the following recorded counts:
+
+  ul
+    li #[strong Different Cars:] !{car_count}
+    li #[strong Manufacturer:] !{manufacturer_count}
+    li #[strong Body Types:] !{bodyType_count}
