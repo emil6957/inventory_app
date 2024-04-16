@@ -3,8 +3,10 @@ extends layout
 block content
     h1 #{title}
     
-    p Manufacturer: #{car.manufacturer.name}
-    p Body Type: #{car.bodyType.type}
+    p Manufacturer: 
+        a(href=`../manufacturer/${car.manufacturer.name}`) #{car.manufacturer.name}
+    p Body Type: 
+        a(href=`../bodyType/${car.bodyType.type}`) #{car.bodyType.type}
     if car.amntInStock == 0
         p(style="color: red;") #[strong OUT OF STOCK]
     else
