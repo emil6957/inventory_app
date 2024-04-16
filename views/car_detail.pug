@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 #{title}
+    
+    p Manufacturer: #{car.manufacturer.name}
+    p Body Type: #{car.bodyType.type}
+    if car.amntInStock == 0
+        p(style="color: red;") #[strong OUT OF STOCK]
+    else
+        p Left In Stock: #{car.amntInStock} 
+    p Price: £#{car.price}
+    p Production Start: #{car.productionStartYear}
+    p Production End: #{car.productionEndYear}
+
