@@ -6,7 +6,7 @@ block content
     ul
         each car in car_list
             li
-                a(href=`./${title}/${car.name}`) #{car.name}
+                a(href=`../car/${car._id}`) #{car.name}
                 if car.amntInStock == 0
                     p(style="color: red;") #[strong OUT OF STOCK]
                 else
