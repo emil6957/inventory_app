@@ -6,8 +6,8 @@ const CarSchema = new Schema({
     name: { type: String, required: true },
     productionStartYear: { type: Number, required: true },
     productionEndYear: { type: Number },
-    bodyType: { type: Schema.Types.ObjectId, required: true },
-    manufacturer: { type: Schema.Types.ObjectId, required: true },
+    bodyType: { type: Schema.Types.ObjectId, ref: "BodyType", required: true },
+    manufacturer: { type: Schema.Types.ObjectId, ref: "Manufacturer", required: true },
     price: { type: Number, required: true },
     amntInStock: { type: Number, required: true },
 });
