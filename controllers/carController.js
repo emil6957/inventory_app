@@ -34,7 +34,12 @@ exports.car_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.car_detail = asyncHandler(async (req, res, next) => {
-    res.send("TODO car detail");
+    const id = req.params.id
+    const car = await Car.findOne({ _id: id })
+        .populate("manufacturer")
+        .populate("bodyType")
+        .exec();
+    res.render("car_detail", { title: car.name, car: car })
 });
 
 exports.car_create_get = asyncHandler(async (req, res, next) => {
