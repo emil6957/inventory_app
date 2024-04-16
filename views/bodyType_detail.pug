@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 #{bodyType.type}
+
+    ul
+    for car in cars
+        li
+            a(href=`../car/${car._id}`) #{car.name}
+

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 Body Types
+
+    ul
+        for bodyType in allBodyTypes
+            li
+                a(href=`./bodyType/${bodyType.type}`) #{bodyType.type}
+
