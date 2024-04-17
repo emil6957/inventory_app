@@ -132,7 +132,7 @@ exports.car_create_post = [
             });
         } else {
             await car.save();
-            res.redirect("./cars/cars");
+            res.redirect("../cars");
         }
     }),
 ];

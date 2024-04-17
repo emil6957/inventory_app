@@ -7,9 +7,25 @@ block content
         label(for="name") Name:
         input(type="text", placeholder="Car Name", name="name")
         label(for="manufacturer") Manufacturer:
-        input(type="text", placeholder="Manufacturer Name", name="manufacturer")
-        label(for="bodyType") Body Type:
-        input(type="text", placeholder="Body Type", name="manufacturer")
+        select(name="manufacturer" required)
+            option(value="") Please Select A Manufacturer
+            for manufacturer in manufacturers
+                if car
+                    if manufacturer._id.toString() === car.manufacturer._id.toString()
+                        option(value=manufacturer._id selected) #{manufacturer.name}
+                    else
+                        option(value=manufacturer._id) #{manufacturer.name}
+                else
+                    option(value=manufacturer._id) #{manufacturer.name}
+
+        for bodyType in bodyTypes
+            div
+                label(for="bodyType") Body Type:
+                if bodyType.checked
+                    input(type="checkbox", name="bodyType", id=bodyType._id, value=bodyType._id checked)
+                else
+                    input(type="checkbox", name="bodyType", id=bodyType._id, value=bodyType._id)
+
         label(for="productionStartYear") Production Start Year:
         input(type="text", placeholder="Production Start Year", name="productionStartYear")
         label(for="productionEndYear") Production End Year:
