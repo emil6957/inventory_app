@@ -143,11 +143,20 @@ exports.car_create_post = [
 ];
 
 exports.car_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO car delete GET");
+    const car = await Car.findById(req.params.id).exec();
+
+    if (car === null) {
+        res.redirect("/cars/cars");
+    }
+
+    res.render("car_delete", {
+        car: car,
+    });
 });
 
 exports.car_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO car delete POST");
+    await Car.findByIdAndDelete(req.body.carid);
+    res.redirect("/cars/cars");
 });
 
 exports.car_update_get = asyncHandler(async (req, res, next) => {

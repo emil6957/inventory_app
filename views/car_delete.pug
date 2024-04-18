@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 Delete #{car.name}
+    
+    form(method="POST")
+        input(type="hidden" name="carid" value=car._id)
+        button(type="submit") Delete
