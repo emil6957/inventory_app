@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Manufacturer = require("../models/manufacturer.js");
 const Car = require("../models/car.js");
 const asyncHandler = require("express-async-handler");
@@ -25,12 +26,38 @@ exports.manufacturer_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.manufacturer_create_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_create_get");
+    res.render("manufacturer_form", {});
 });
 
-exports.manufacturer_create_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_create_post");
-});
+exports.manufacturer_create_post = [
+    body("name", "Name must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("yearFounded", "Year Founded must be valid.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        const manufacturer = new Manufacturer({
+            name: req.body.name,
+            yearFounded: req.body.yearFounded,
+        });
+
+        if (!errors.isEmpty()) {
+            res.render("manufacturer_form", {
+                errors: errors.array(),
+            });
+        }
+        else {
+            await manufacturer.save();
+            res.redirect("../manufacturers");
+        }
+    }),
+]
 
 exports.manufacturer_delete_get = asyncHandler(async (req, res, next) => {
     res.send("TODO manufacturer_delete_get");
