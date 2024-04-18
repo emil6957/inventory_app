@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 Add New Body Type
+    form(method="POST")
+        label(for="type") Type: 
+        input(type="text", name="type" placeholder="Body Type")
+        button(type="submit") Submit 
+
+        if errors
+            for error in errors
+                p(style="color: red;") #{error.msg}
