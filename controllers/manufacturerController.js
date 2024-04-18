@@ -41,7 +41,6 @@ exports.manufacturer_create_post = [
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
-
         const manufacturer = new Manufacturer({
             name: req.body.name,
             yearFounded: req.body.yearFounded,
@@ -60,11 +59,16 @@ exports.manufacturer_create_post = [
 ]
 
 exports.manufacturer_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_delete_get");
+    const name = req.params.id;
+    const manufacturer = await Manufacturer.findOne({ name: name });
+    res.render("manufacturer_delete", {
+        manufacturer: manufacturer
+    });
 });
 
 exports.manufacturer_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_delete_post");
+    await Manufacturer.findByIdAndDelete(req.body.manufacturerid);
+    res.redirect("../../manufacturers");
 });
 
 exports.manufacturer_update_get = asyncHandler(async (req, res, next) => {
