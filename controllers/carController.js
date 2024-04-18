@@ -63,6 +63,11 @@ exports.car_create_post = [
                 typeof req.body.bodyType === "undefined" ? [] : [req.body.bodyType];
         }
         next();
+
+        if (!Array.isArray(req.body.manufacturer)) {
+            req.body.manufacturer =
+                typeof req.body.manufacturer === "undefined" ? [] : [req.body.manufacturer];
+        }
     },
 
     body("name", "Name must not be empty.")
