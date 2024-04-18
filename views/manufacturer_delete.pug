@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 Delete #{manufacturer.name}
+    
+    form(method="POST")
+        input(type="hidden" name="manufacturerid" value=manufacturer._id)
+        button(type="submit") Delete
