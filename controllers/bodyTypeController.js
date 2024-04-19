@@ -52,11 +52,14 @@ exports.bodyType_create_post = [
 ]
 
 exports.bodyType_delete_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO bodType delete_get");
+    const type = req.params.id;
+    const bodyType = await BodyType.findOne({ type: type });
+    res.render("bodyType_delete", { bodyType: bodyType });
 });
 
 exports.bodyType_delete_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO bodType delete_post");
+    await BodyType.findByIdAndDelete(req.body.bodyTypeid);
+    res.redirect("../../bodyTypes");
 });
 
 exports.bodyType_update_get = asyncHandler(async (req, res, next) => {
