@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 Delete #{bodyType.type}
+
+    form(method="POST")
+        input(type="hidden" name="bodyTypeid" value=bodyType._id)
+        button(type="submit") Delete
