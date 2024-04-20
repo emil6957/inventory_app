@@ -3,8 +3,9 @@ extends layout
 block content
     h1 Add New Body Type
     form(method="POST")
+        input(type="hidden" name="bodyTypeid" value=(undefined === bodyType ? "" : bodyType._id))
         label(for="type") Type: 
-        input(type="text", name="type" placeholder="Body Type")
+        input(type="text", name="type" placeholder="Body Type" required value=(undefined === bodyType ? "" : bodyType.type))
         button(type="submit") Submit 
 
         if errors
