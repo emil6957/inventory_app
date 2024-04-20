@@ -26,7 +26,9 @@ exports.manufacturer_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.manufacturer_create_get = asyncHandler(async (req, res, next) => {
-    res.render("manufacturer_form", {});
+    res.render("manufacturer_form", {
+        title: "Add Manufacturer",
+    });
 });
 
 exports.manufacturer_create_post = [
@@ -49,6 +51,7 @@ exports.manufacturer_create_post = [
         if (!errors.isEmpty()) {
             res.render("manufacturer_form", {
                 errors: errors.array(),
+                title: "Add Manufacturer",
             });
         }
         else {
@@ -72,9 +75,41 @@ exports.manufacturer_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.manufacturer_update_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_update_get");
+    const name = req.params.id;
+    const manufacturer = await Manufacturer.findOne({ name: name });
+    res.render("manufacturer_form", {
+        title: "Update Manufacturer",
+        manufacturer: manufacturer,
+    });
 });
 
-exports.manufacturer_update_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO manufacturer_update_post");
-});
+exports.manufacturer_update_post = [
+    body("name", "Name must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("yearFounded", "Year Founded must be valid.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        const manufacturer = new Manufacturer({
+            name: req.body.name,
+            yearFounded: req.body.yearFounded,
+            _id: req.body.manufacturerid,
+        });
+
+        if (!errors.isEmpty()) {
+            res.render("manufacturer_form", {
+                errors: errors.array(),
+                title: "Add Manufacturer",
+                manufacturer: manufacturer,
+            });
+        } else {
+            const updatedManufacturer = await Manufacturer.findByIdAndUpdate(req.body.manufacturerid, manufacturer);
+            res.redirect(`../${req.body.name}`);
+        }
+    }),
+]
