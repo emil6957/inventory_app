@@ -160,9 +160,104 @@ exports.car_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.car_update_get = asyncHandler(async (req, res, next) => {
-    res.send("TODO car update POST");
+    const [car, allManufacturers, allBodyTypes] = await Promise.all([
+        Car.findById(req.params.id).populate("manufacturer").populate("bodyType").exec(),
+        Manufacturer.find().sort({ name: 1 }).exec(),
+        BodyType.find().sort({ type: 1 }).exec(),
+    ]);
+
+    if (car === null) {
+        const err = new Error("Book not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("car_form", {
+        title: "Update Book",
+        car: car,
+        manufacturers: allManufacturers,
+        bodyTypes: allBodyTypes,
+    });
 });
 
-exports.car_update_post = asyncHandler(async (req, res, next) => {
-    res.send("TODO car update POST");
-});
+exports.car_update_post = [
+    (req, res, next) => {
+        if (!Array.isArray(req.body.bodyType)) {
+            req.body.bodyType =
+                typeof req.body.bodyType === "undefined" ? [] : [req.body.bodyType];
+        }
+        next();
+
+        if (!Array.isArray(req.body.manufacturer)) {
+            req.body.manufacturer =
+                typeof req.body.manufacturer === "undefined" ? [] : [req.body.manufacturer];
+        }
+    },
+
+    body("name", "Name must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("manufacturer", "Manufacturer must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("productionStartYear", "productionStartYear must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("productionEndYear", "productionEndYear must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("amntInStock", "amntInStock must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("price", "price must not be empty.")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("bodyType.*").escape(),
+
+    asyncHandler(async (req, res, next) => {
+        console.log("STARTED HANDLER");
+        const errors = validationResult(req);
+
+        const car = new Car({
+            name: req.body.name,
+            manufacturer: req.body.manufacturer,
+            bodyType: req.body.bodyType,
+            productionStartYear: req.body.productionStartYear,
+            productionEndYear: req.body.productionEndYear,
+            price: req.body.price,
+            amntInStock: req.body.amntInStock,
+            _id: req.params.id,
+        });
+
+        if (!errors.isEmpty()) {
+
+            const [allManufacturers, allBodyTypes] = await Promise.all([
+                Manufacturer.find().sort({ name: 1 }).exec(),
+                BodyType.find().sort({ type: 1 }).exec(),
+            ]);
+
+            for (const bodyType of allBodyTypes) {
+                if (car.bodyType.includes(bodyType._id)) {
+                    bodyType.checked = "true";
+                }
+            }
+
+            res.render("car_form", {
+                name: "Create Car",
+                manufacturers: allManufacturers,
+                bodyTypes: allBodyTypes,
+                car: car,
+                errors: errors.array(),
+            });
+        } else {
+            const updatedCar = await Car.findByIdAndUpdate(req.params.id, car);
+            res.redirect(`../${updatedCar._id}`);
+        }
+    }),
+]
