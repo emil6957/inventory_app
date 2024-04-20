@@ -1,13 +1,14 @@
 extends layout
 
 block content
-    h1 Add New Manufacutrer
+    h1 #{title}
 
     form(method="POST")
+        input(type="hidden" name="manufacturerid" value=(undefined === manufacturer ? "" : manufacturer._id))
         label(for="name") Name:
-        input(type="text", placeholder="Manufacturer Name", name="name")
+        input(type="text", placeholder="Manufacturer Name", name="name" required value=(undefined === manufacturer ? "" : manufacturer.name))
         label(for="yearFounded") Year Founded:
-        input(type="range" min="1900" max="2024" name="yearFounded" oninput="this.nextElementSibling.value = this.value")
+        input(type="range" min="1900" max="2024" name="yearFounded" required value=(undefined === manufacturer ? "" : manufacturer.yearFounded) oninput="this.nextElementSibling.value = this.value")
         output
         button(type="submit") Submit
 
