@@ -5,10 +5,10 @@ block content
 
     form(method="POST")
         label(for="name") Name:
-        input(type="text", placeholder="Car Name", name="name")
+        input(type="text" placeholder="Car Name" name="name" required value=(undefined === car ? '' : car.name))
         label(for="manufacturer") Manufacturer:
         select(name="manufacturer" required)
-            option(value="") Please Select A Manufacturer
+            option(disabled value=(undefined === car.manufacturer ? "" : car.manufacturer.name)) Please Select A Manufacturer
             for manufacturer in manufacturers
                 if car
                     if manufacturer._id.toString() === car.manufacturer._id.toString()
@@ -17,23 +17,27 @@ block content
                         option(value=manufacturer._id) #{manufacturer.name}
                 else
                     option(value=manufacturer._id) #{manufacturer.name}
-
-        for bodyType in bodyTypes
-            div
-                label(for="bodyType") Body Type:
-                if bodyType.checked
-                    input(type="checkbox", name="bodyType", id=bodyType._id, value=bodyType._id checked)
+        
+        label(for="bodyType") Body Type:
+        select(name="bodyType" required)
+            option(disabled value=(undefined === car.bodyType ? "" : car.bodyType.type)) Please Select A Body Type
+            for bodyType in bodyTypes
+                if car
+                    if bodyType._id.toString() === car.bodyType._id.toString()
+                        option(value=bodyType._id selected) #{bodyType.type}
+                    else
+                        option(value=bodyType._id) #{bodyType.type}
                 else
-                    input(type="checkbox", name="bodyType", id=bodyType._id, value=bodyType._id)
+                    option(value=bodyType._id) #{bodyType.type}
 
         label(for="productionStartYear") Production Start Year:
-        input(type="text", placeholder="Production Start Year", name="productionStartYear")
+        input(type="number", placeholder="Production Start Year", name="productionStartYear" required value=(undefined === car ? "" : car.productionStartYear))
         label(for="productionEndYear") Production End Year:
-        input(type="text", placeholder="Production End Year", name="productionEndYear")
+        input(type="number", placeholder="Production End Year", name="productionEndYear" required value=(undefined === car ? "" : car.productionEndYear))
         label(for="amntInStock") Ammount In Stock:
-        input(type="text", placeholder="Ammount In Stock", name="amntInStock")
+        input(type="number", placeholder="Ammount In Stock", name="amntInStock" required value=(undefined === car ? "" : car.amntInStock))
         label(for="price") Price:
-        input(type="text", placeholder="Price", name="price")
+        input(type="number", placeholder="Price", name="price" required value=(undefined === car ? "" : car.price))
         button(type="submit") Submit
 
 
