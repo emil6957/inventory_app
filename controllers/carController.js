@@ -221,7 +221,6 @@ exports.car_update_post = [
     body("bodyType.*").escape(),
 
     asyncHandler(async (req, res, next) => {
-        console.log("STARTED HANDLER");
         const errors = validationResult(req);
 
         const car = new Car({
@@ -239,8 +238,7 @@ exports.car_update_post = [
 
             const [allManufacturers, allBodyTypes] = await Promise.all([
                 Manufacturer.find().sort({ name: 1 }).exec(),
-                BodyType.find().sort({ type: 1 }).exec(),
-            ]);
+                BodyType.find().sort({ type: 1 }).exec(),]);
 
             for (const bodyType of allBodyTypes) {
                 if (car.bodyType.includes(bodyType._id)) {
