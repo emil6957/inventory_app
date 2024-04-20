@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1 Add New Body Type
+    h1 #{title}
     form(method="POST")
         input(type="hidden" name="bodyTypeid" value=(undefined === bodyType ? "" : bodyType._id))
         label(for="type") Type: 
