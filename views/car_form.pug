@@ -8,7 +8,7 @@ block content
         input(type="text" placeholder="Car Name" name="name" required value=(undefined === car ? '' : car.name))
         label(for="manufacturer") Manufacturer:
         select(name="manufacturer" required)
-            option(disabled value=(undefined === car.manufacturer ? "" : car.manufacturer.name)) Please Select A Manufacturer
+            option(value="") Please Select A Manufacturer
             for manufacturer in manufacturers
                 if car
                     if manufacturer._id.toString() === car.manufacturer._id.toString()
@@ -20,7 +20,7 @@ block content
         
         label(for="bodyType") Body Type:
         select(name="bodyType" required)
-            option(disabled value=(undefined === car.bodyType ? "" : car.bodyType.type)) Please Select A Body Type
+            option(value="") Please Select A Body Type
             for bodyType in bodyTypes
                 if car
                     if bodyType._id.toString() === car.bodyType._id.toString()
