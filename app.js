@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var favicon = require('serve-favicon');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -7,8 +8,15 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const carsRouter = require("./routes/cars");
-
+// fonts 
+// CelebriSans Bold
+// Cartograph Sans Heavy
+// CelebriSans Bold
+// colors
+// Laser 1
+// #C8B568
 var app = express();
+app.use(favicon(path.join(__dirname, "public", "images", "logo", "Favicons", "favicon.png")));
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
