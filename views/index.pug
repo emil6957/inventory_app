@@ -1,24 +1,28 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  include includes/header.pug
+    div(class="w-screen h-screen" style="background-image: url(/images/red-yellow-cars.jpg); background-repeat: no-repeat; background-size: cover;")
+        div(class="text-white h-full bg-black/50 p-32")
+          h1(class="") AutoHive
+          p(class="") Buzzing with Car Deals
 
-  h1 Dynamic content
+          h1 Dynamic content
 
-  p The collection has the following recorded counts:
+          p The collection has the following recorded counts:
 
-  ul
-    li #[strong Different Cars:] !{car_count}
-    li #[strong Manufacturer:] !{manufacturer_count}
-    li #[strong Body Types:] !{bodyType_count}
+          ul
+            li #[strong Different Cars:] !{car_count}
+            li #[strong Manufacturer:] !{manufacturer_count}
+            li #[strong Body Types:] !{bodyType_count}
 
-  h2 View all
-  
-  ul
-    li
-      a(href="./cars/cars") Cars
-    li
-      a(href="./cars/manufacturers") Manufacturers
-    li
-      a(href="./cars/bodyTypes") Body Types
+          h2 View all
+          
+          ul
+            li
+              a(href="./cars/cars") Cars
+            li
+              a(href="./cars/manufacturers") Manufacturers
+            li
+              a(href="./cars/bodyTypes") Body Types
+  include includes/footer.pug
