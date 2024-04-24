@@ -2,27 +2,21 @@ extends layout
 
 block content
   include includes/header.pug
-    div(class="w-screen h-screen" style="background-image: url(/images/red-yellow-cars.jpg); background-repeat: no-repeat; background-size: cover;")
-        div(class="text-white h-full bg-black/50 p-32")
-          h1(class="") AutoHive
-          p(class="") Buzzing with Car Deals
-
-          h1 Dynamic content
-
-          p The collection has the following recorded counts:
-
-          ul
-            li #[strong Different Cars:] !{car_count}
-            li #[strong Manufacturer:] !{manufacturer_count}
-            li #[strong Body Types:] !{bodyType_count}
-
-          h2 View all
-          
-          ul
-            li
-              a(href="./cars/cars") Cars
-            li
-              a(href="./cars/manufacturers") Manufacturers
-            li
-              a(href="./cars/bodyTypes") Body Types
+    div(class="overflow-x-hidden")
+        div(class="w-screen h-screen" style="background-image: url(/images/red-yellow-cars.jpg); background-repeat: no-repeat; background-size: cover;")
+            div(class="w-full h-full bg-black/70 p-24")
+              div(class="ml-32 mt-64")
+                  h1(class="text-gold text-5xl") Buzzing Deals with !{car_count} cars <br>from !{manufacturer_count} manufacturers 
+                  p(class="text-gold italic spacing tracking-widest mb-4") Ranging from !{bodyType_count} different Body Types
+                  button(class="border-2 rounded border-gold border-solid text-gold text-2xl p-2") Browse Now!
+        div(class="w-screen h-screen flex justify-around align-center" style="background-image: url(/images/home-page-img.jpg); background-repeat: no-repeat; background-size: cover; background-position: 0% 100%;")
+            div(class="flex flex-col items-center w-1/4")
+                div(class="flex flex-col w-64 h-64 border-8 rounded border-gold border-solid rounded-full")
+                p(class="") Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+            div(class="flex flex-col items-center w-1/4")
+                div(class="flex flex-col w-64 h-64 border-8 rounded border-gold border-solid rounded-full")
+                p(class="") Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+            div(class="flex flex-col items-center w-1/4")
+                div(class="flex flex-col w-64 h-64 border-8 rounded border-gold border-solid rounded-full")
+                p(class="") Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
   include includes/footer.pug
