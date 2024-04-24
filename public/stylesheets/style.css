@@ -747,6 +747,14 @@ h1{
   gap: 0px;
 }
 
+.justify-self-start{
+  justify-self: start;
+}
+
+.justify-self-center{
+  justify-self: center;
+}
+
 .overflow-x-hidden{
   overflow-x: hidden;
 }
