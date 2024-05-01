@@ -582,6 +582,10 @@ h1{
   position: absolute;
 }
 
+.relative{
+  position: relative;
+}
+
 .bottom-0{
   bottom: 0px;
 }
@@ -630,12 +634,16 @@ h1{
   display: none;
 }
 
-.h-16{
-  height: 4rem;
+.h-12{
+  height: 3rem;
 }
 
 .h-24{
   height: 6rem;
+}
+
+.h-6{
+  height: 1.5rem;
 }
 
 .h-64{
@@ -659,6 +667,10 @@ h1{
   width: 6rem;
 }
 
+.w-6{
+  width: 1.5rem;
+}
+
 .w-64{
   width: 16rem;
 }
@@ -680,6 +692,22 @@ h1{
   width: 100vw;
 }
 
+@keyframes bounce{
+  0%, 100%{
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50%{
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.animate-\[bounce_1\.5s_ease-in-out_infinite\]{
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
 .flex-col{
   flex-direction: column;
 }
@@ -698,6 +726,10 @@ h1{
 
 .justify-around{
   justify-content: space-around;
+}
+
+.gap-16{
+  gap: 4rem;
 }
 
 .gap-32{
@@ -822,4 +854,32 @@ h1{
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.underline{
+  text-decoration-line: underline;
+}
+
+@keyframes spinOnce{
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.hover\:animate-spinOnce:hover{
+  animation: spinOnce 1s 1;
+}
+
+@keyframes turnToGold{
+  100%{
+    color: gold;
+  }
+}
+
+.hover\:animate-turnToGold:hover{
+  animation: turnToGold 500ms 1 forwards;
 }
