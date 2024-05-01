@@ -1,9 +1,14 @@
 extends layout
 
 block content
-    h1 Car List
+    div
+        include includes/header.pug
+        h1 Car List
 
-    ul
-        for car in car_list
-            li
-                a(href=`./car/${car._id}`) #{car.manufacturer.name} #{car.name}
+        ul
+            for car in car_list
+                li
+                    div(class="")
+                        img(src="")
+                        a(href=`./car/${car._id}`) #{car.manufacturer.name} #{car.name}
+        include includes/footer.pug
