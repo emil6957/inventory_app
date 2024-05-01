@@ -15,6 +15,19 @@ module.exports = {
             fontFamily: {
                 body: ["Lato"],
             },
+            keyframes: {
+                spinOnce: {
+                    "0%": { transform: "rotate(0deg)" },
+                    "100%": { transform: "rotate(360deg)" },
+                },
+                turnToGold: {
+                    "100%": { color: "gold" },
+                },
+            },
+            animation: {
+                spinOnce: "spinOnce 1s 1",
+                turnToGold: "turnToGold 500ms 1 forwards",
+            },
         },
     },
     plugins: [
