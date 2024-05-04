@@ -1,11 +1,15 @@
 extends layout
 
 block content
-    h1 Manufacturers
-
-    ul
-        each manufacturer in manufacturer_list
-            li
-                a(href=`./manufacturer/${manufacturer.name}`) #{manufacturer.name}
-     
-
+    div(class="")
+        include includes/header.pug
+        div(class="p-16 pt-24")
+            ul(class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8")
+                each manufacturer in manufacturer_list
+                    li(class="")
+                        a(href=`./manufacturer/${manufacturer.name}`)
+                            div(class="rounded-lg border-4 border-solid border-black")
+                                div(class="w-full h-24 bg-black")
+                                div(class="p-2")
+                                    p(class="text-4xl tracking-wide") #{manufacturer.name}
+        include includes/footer.pug 
