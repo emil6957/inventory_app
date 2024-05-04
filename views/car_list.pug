@@ -1,14 +1,38 @@
 extends layout
 
 block content
-    div
+    div(class="relative")
         include includes/header.pug
-        h1 Car List
+        div(class="p-16 pt-20")
+            div(class="flex items-center gap-4 mb-8")
+                div(class="w-full flex gap-4 p-2 rounded-lg border-solid border-2 border-black")
+                    svg(class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512")
+                        path(d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z")
+                    input(class="w-full text-xl" type="text" placeholder="Search By Name")
+                div(class="p-2 rounded-lg border-solid border-2 border-black")
+                    select(class="text-xl")
+                        option(class="") All
+                        for bodyType in bodyType_list
+                            option(class="") #{bodyType.type}
+                div(class="p-2 rounded-lg border-solid border-2 border-black")
+                    select(class="text-xl")
+                        option(class="") Alphabet Asc
+                        option(class="") Alphabet Desc
+                        option(class="") Price Asc
+                        option(class="") Price Desc
+                        
 
-        ul
-            for car in car_list
-                li
-                    div(class="")
-                        img(src="")
-                        a(href=`./car/${car._id}`) #{car.manufacturer.name} #{car.name}
+            ul(class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8")
+                for car in car_list
+                    li(class="h-64")
+                        a(href=`./car/${car._id}`)
+                            div(class="rounded-lg border-4 border-solid border-black")
+                                div(class="w-full h-40 bg-black")
+                                div(class="p-2")
+                                    p(class="text-4xl tracking-wide") #{car.manufacturer.name} #{car.name}
+                                    p(class="text-2xl tracking-wide") #{car.bodyType.type}
+                li(class="h-64")
+                    a(href="./create")
+                        div(class="rounded-lg border-4 border-solid border-black")
+                            div(class="w-full h-64 bg-black")
         include includes/footer.pug
