@@ -1,10 +1,15 @@
 extends layout
 
 block content
-    h1 Body Types
-
-    ul
-        for bodyType in allBodyTypes
-            li
-                a(href=`./bodyType/${bodyType.type}`) #{bodyType.type}
-
+    div(class="")
+        include includes/header.pug
+        div(class="p-16 pt-24")
+            ul(class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8")
+                for bodyType in allBodyTypes
+                    li(class="")
+                        a(href=`./bodyType/${bodyType.type}`)
+                            div(class="rounded-lg border-4 border-solid border-black")
+                                div(class="w-full h-24 bg-black")
+                                div(class="p-2")
+                                    p(class="text-3xl tracking-wide" href=`./bodyType/${bodyType.type}`) #{bodyType.type}
+        include includes/footer.pug
