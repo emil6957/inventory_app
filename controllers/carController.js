@@ -25,13 +25,18 @@ exports.index = asyncHandler(async (req, res, next) => {
 })
 
 exports.car_list = asyncHandler(async (req, res, next) => {
-    const allCars = await Car.find({}, "name manufacturer bodyType")
-        .sort({ name: 1 })
-        .populate("manufacturer")
-        .populate("bodyType")
-        .exec();
+    const [allCars, allBodyTypes] = await Promise.all([
+        Car.find({}, "name manufacturer bodyType")
+            .sort({ name: 1 })
+            .populate("manufacturer")
+            .populate("bodyType")
+            .exec(),
+        BodyType.find()
+            .sort({ type: 1 })
+            .exec()
+    ]);
 
-    res.render("car_list", { title: "Car List", car_list: allCars });
+    res.render("car_list", { title: "Car List", car_list: allCars, bodyType_list: allBodyTypes });
 });
 
 exports.car_detail = asyncHandler(async (req, res, next) => {
